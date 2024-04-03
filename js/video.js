@@ -1,5 +1,7 @@
 var video;
 let thisVideo = document.getElementById("player1")
+var volumeSlider = document.getElementById("slider")
+var volumeDisplay = document.getElementById("volume")
 
 window.addEventListener("load", function() {
 	console.log("Good job opening the window")
@@ -9,6 +11,7 @@ window.addEventListener("load", function() {
 
 
 document.querySelector("#play").addEventListener("click", function() {
+	volumeDisplay.innerHTML = volumeSlider.value + "%"
 	console.log("Play Video");
 	thisVideo.play()
 });
@@ -29,13 +32,21 @@ speedButton.addEventListener("click", function(){
 	console.log(thisVideo.playbackRate)
 })
 
+//skip ahead
+var skip = document.getElementById("skip")
+skip.addEventListener("click", function(){
+	thisVideo.currentTime = thisVideo.currentTime + 10
+	if(thisVideo.currentTime >= thisVideo.duration){
+		thisVideo.currentTime = 0
+	}
+	console.log(thisVideo.currentTime)
+});
+
 //volume
-var volumeSlider = document.getElementById("slider")
-var volumeDisplay = document.getElementById("volume")
-volumeDisplay.innerHTML = volumeSlider.value
+volumeDisplay.innerHTML = volumeSlider.value + "%"
 document.getElementById("slider").addEventListener("input", function(){
 	document.getElementById("player1").volume = volumeSlider.value / 100;
-	volumeDisplay.innerHTML = volumeSlider.value
+	volumeDisplay.innerHTML = volumeSlider.value + "%"
 })
 
 //mute
